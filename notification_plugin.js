@@ -11,7 +11,7 @@ function global(name) {
   } else if (name == "%GuardianValue") {
 //     return "8.9 mmol/L";
     return "9.0 mmol/L ↑"
-    return "100 mg/dL";
+//    return "100 mg/dL";
 //     return "calibrating please wait";
   } else if (name = "%BGLValue") {
     return "170"
