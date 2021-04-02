@@ -4,6 +4,7 @@ This is a plugin for Nightscout to be used in combination with Tasker and the No
 This requires the following on your Android phone: 
 
 https://play.google.com/store/apps/details?id=net.dinglisch.android.taskerm
+
 https://play.google.com/store/apps/details?id=com.balda.notificationlistener
 
 In Tasker -> Profiles
