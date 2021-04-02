@@ -176,6 +176,10 @@ if (bglString) {
 bglString = global("%GuardianValue");
 if (bglString.indexOf(' ') > 0) {
   var temp = parseFloat(bglString.substring(0, bglString.indexOf(' ')));
+  if (!Number.isNaN(temp)) {
+    bgl = Math.round(temp * 18.0182);
+  }
+  /*
   if (!Number.isNaN(temp) && bglString.indexOf(' ') < bglString.length + 1) {
   	var units = bglString.substring(bglString.indexOf(' ') + 1);
     if (units.startsWith("mmol/L")) {
@@ -183,6 +187,7 @@ if (bglString.indexOf(' ') > 0) {
     } else if (units.startsWith("mg/dL")) {
       bgl = temp;
     } //otherwise we ignore it because its invalid
+    */
   }
 }
 
