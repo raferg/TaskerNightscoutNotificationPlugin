@@ -160,6 +160,9 @@ function SHA1 (msg) {
     return temp.toLowerCase(); 
  }
 
+//Do this first in case it crashes partway
+setGlobal("%DoUpload", false);
+
 var API_SECRET = "INSERT_API_SECRET_HERE";
 var bgl = 0;
 var bglString = global("%GuardianValue");
@@ -178,7 +181,5 @@ if (bglString.indexOf(' ') > 0) {
     setGlobal("%JSONvalue", JSON.stringify(vals));
     setGlobal("%SHA1-SECRET", SHA1(API_SECRET));
     setGlobal("%DoUpload", true);
-  } else {
-    setGlobal("%DoUpload", false);
   }
 }
