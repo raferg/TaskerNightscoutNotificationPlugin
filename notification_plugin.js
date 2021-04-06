@@ -160,14 +160,17 @@ function SHA1 (msg) {
     return temp.toLowerCase(); 
  }
 
-var API_SECRET = "INSERT_API_SECRET_HERE";
-var doUpload = false;
+setGlobal("%SHA1-SECRET", SHA1("INSERT_API_SECRET_HERE"));
 
+var doUpload = false;
 var bgl = 0;
+
 var bglString = global("%GuardianValue");
-if (bglString.indexOf(' ') > 0) {
-  var temp = parseFloat(bglString.substring(0, bglString.indexOf(' ')));
+var spaceIdx = bglString.indexOf(' ');
+if (spaceIdx > 0) {
+  var temp = parseFloat(bglString.substring(0, spaceIdx));
   if (!Number.isNaN(temp)) {
+    setGlobal("%BGL", bgl);
     bgl = Math.round(temp * 18.0182); //Don't do this conversion if not using mmol/L as units
     doUpload = true;
   }
@@ -175,12 +178,10 @@ if (bglString.indexOf(' ') > 0) {
 
 setGlobal("%DoUpload", doUpload);
 if (doUpload) {
-  setGlobal("%BGL", bgl);
   var dVal = parseInt(global("%TIMEMS"));
   var dString = new Date();
   setGlobal("%DATESTRING", dString.toISOString());
 
   var vals=[{"type":"sgv","sgv":bgl,"date":parseInt(global("%TIMEMS")),"dateString":dString.toISOString(),"device":"Tasker:plugin"}];
   setGlobal("%JSONvalue", JSON.stringify(vals));
-  setGlobal("%SHA1-SECRET", SHA1(API_SECRET));
 }
