@@ -163,36 +163,14 @@ function SHA1 (msg) {
 var API_SECRET = "INSERT_API_SECRET_HERE";
 var doUpload = false;
 
-//getting last value so that we can reuse it later
-var bgl = 0; 
-var bglString = global("%BGL");
-if (bglString) {
-  bgl = parseInt(bglString);
-  if (Number.isNaN(bgl)) {
-    bgl = 0;
-  }
-}
-
-bglString = global("%GuardianValue");
+var bgl = 0;
+var bglString = global("%GuardianValue");
 if (bglString.indexOf(' ') > 0) {
   var temp = parseFloat(bglString.substring(0, bglString.indexOf(' ')));
   if (!Number.isNaN(temp)) {
-    bgl = Math.round(temp * 18.0182);
+    bgl = Math.round(temp * 18.0182); //Don't do this conversion if not using mmol/L as units
+    doUpload = true;
   }
-  /*
-  if (!Number.isNaN(temp) && bglString.indexOf(' ') < bglString.length + 1) {
-  	var units = bglString.substring(bglString.indexOf(' ') + 1);
-    if (units.startsWith("mmol/L")) {
-      bgl = Math.round(temp * 18.0182);
-    } else if (units.startsWith("mg/dL")) {
-      bgl = temp;
-    } //otherwise we ignore it because its invalid
-    */
-  }
-}
-
-if (!Number.isNaN(bgl)) {
-  doUpload = true;
 }
 
 setGlobal("%DoUpload", doUpload);
