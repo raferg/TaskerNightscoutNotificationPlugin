@@ -29,3 +29,6 @@ Add Task
  4. Variable Set
   * %Response To %http_response_code
    
+
+
+See https://github.com/NightscoutFoundation/xDrip/issues/1684
